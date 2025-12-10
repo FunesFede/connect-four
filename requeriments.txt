@@ -1,0 +1,2 @@
+py-cord==2.7.0rc1
+pycord_rest_bot
