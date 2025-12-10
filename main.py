@@ -1,7 +1,7 @@
 import discord
 from pycord_rest import App, ApplicationAuthorizedEvent
 
-import dotenv
+from dotenv import load_dotenv
 import os
 import io
 
@@ -9,7 +9,7 @@ from views.game import Game
 from helpers.manager import GameManager
 
 
-dotenv.load_dotenv()
+load_dotenv()
 
 
 app = App(default_command_integration_types=[
@@ -40,8 +40,8 @@ async def play(ctx: discord.ApplicationContext, opponent: discord.User, rows: in
 
 if __name__ == "__main__":
     app.run(
-        token=os.environ["TOKEN"],
-        public_key=os.environ["PUBLIC_KEY"],
+        token=os.getenv("TOKEN"),  # type: ignore
+        public_key=os.getenv("PUBLIC_KEY"),  # type: ignore
         uvicorn_options={
             "host": "0.0.0.0",
             "port": 1028,
