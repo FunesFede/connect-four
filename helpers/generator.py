@@ -58,27 +58,3 @@ class GridGenerator:
                 result.paste(chip, (x, y), chip)
 
         return result
-
-
-if __name__ == "__main__":
-    # Example usage with a sample game state
-    sample_matrix = [
-        [1, 0, 0, 0, 0, 0, 0],  # Row 0 (top)
-        [0, 0, 0, 0, 0, 0, 0],  # Row 1
-        [0, 0, 0, 1, 0, 0, 0],  # Row 2
-        [0, 0, 2, 1, 0, 0, 0],  # Row 3
-        [0, 1, 2, 2, 0, 0, 0],  # Row 4
-        [0, 1, 1, 2, 1, 2, 0],  # Row 5 (bottom)
-    ]
-
-    # Create a grid generator with default Connect 4 size (6 rows, 7 cols)
-    generator = GridGenerator(rows=6, cols=7)
-
-    # Generate the grid image
-    result_image = generator.generate_grid(sample_matrix)
-
-    # Display the result
-    result_image.show()
-
-    # You can also save it if needed
-    # result_image.save('output.png')

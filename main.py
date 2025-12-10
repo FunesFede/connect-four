@@ -27,6 +27,9 @@ async def on_application_authorized(event: ApplicationAuthorizedEvent):
 @discord.option("columns", int, description="The number of columns for the grid. Defaults to 7", defult=7, min_value=5, max_value=25)
 @discord.option("spin_it", bool, description="Allow spinning columns? Defaults to True", defult=True)
 async def play(ctx: discord.ApplicationContext, opponent: discord.User, rows: int = 6, columns: int = 7, spin_it: bool = True):
+    if ctx.author.id == opponent.id or opponent.bot:
+        return await ctx.respond(content="You cannot play against this user!", ephemeral=True)
+
     game_container: discord.ui.DesignerView = Game(
         GameManager(rows, columns, spin_it, ctx.author.id, opponent.id))
     image = game_container.get_grid()
