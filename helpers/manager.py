@@ -128,3 +128,6 @@ class GameManager:
                 return self.red_id if player_value == 1 else self.yellow_id
 
         return None
+
+    def check_tie(self) -> bool:
+        return all(all(cell != 0 for cell in row) for row in self.grid) and self.turn_count >= self.tie_round

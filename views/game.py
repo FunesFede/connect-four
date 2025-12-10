@@ -111,20 +111,24 @@ class Game(DesignerView):
 
         gallery.add_item("attachment://grid.png")
 
-        winner = self.game_manager.validate_connect(
-        ) if self.game_manager.turn_count > 6 else None
-        if winner:
-            container.color = discord.Color.red(
-            ) if winner == self.game_manager.red_id else discord.Color.yellow()
+        if self.game_manager.turn_count >= self.game_manager.tie_round and self.game_manager.check_tie():
             container.add_text(
-                f"{"<:red_chip:1448166834137206925>" if winner == self.game_manager.red_id else "<:yellow_chip:1448166817435746366>"} <@{winner}> wins! They connected four in a row!")
-            container.add_item(gallery)
-
+                "<:red_chip:1448166834137206925> <:yellow_chip:1448166817435746366> The grid is full! It is a tie!")
         else:
-            container.add_item(Section(TextDisplay(
-                f"{"<:red_chip:1448166834137206925>" if self.game_manager.current_turn == self.game_manager.red_id else "<:yellow_chip:1448166817435746366>"} It is <@{self.game_manager.current_turn}>'s turn!"), accessory=SpinItButton(self.game_manager)))
-            container.add_item(gallery)
-            container.add_item(PlaceChipActionRow(self.game_manager))
+            winner = self.game_manager.validate_connect(
+            ) if self.game_manager.turn_count > 6 else None
+            if winner:
+                container.color = discord.Color.red(
+                ) if winner == self.game_manager.red_id else discord.Color.yellow()
+                container.add_text(
+                    f"{"<:red_chip:1448166834137206925>" if winner == self.game_manager.red_id else "<:yellow_chip:1448166817435746366>"} <@{winner}> wins! They connected four in a row!")
+                container.add_item(gallery)
+
+            else:
+                container.add_item(Section(TextDisplay(
+                    f"{"<:red_chip:1448166834137206925>" if self.game_manager.current_turn == self.game_manager.red_id else "<:yellow_chip:1448166817435746366>"} It is <@{self.game_manager.current_turn}>'s turn!"), accessory=SpinItButton(self.game_manager)))
+                container.add_item(gallery)
+                container.add_item(PlaceChipActionRow(self.game_manager))
 
         self.add_item(container)
 
