@@ -37,13 +37,10 @@ async def play(ctx: discord.ApplicationContext, opponent: discord.User, rows: in
         grid = discord.File(fp=image_binary, filename="grid.png")
         await ctx.respond(view=game_container, files=[grid])
 
-token = os.getenv("TOKEN")
-public_key = os.getenv("PUBLIC_KEY")
-
 if __name__ == "__main__":
     app.run(
-        token=token,  # type: ignore
-        public_key=public_key,  # type: ignore
+        token=os.environ["TOKEN"],
+        public_key=os.environ["PUBLIC_KEY"],
         uvicorn_options={
             "host": "0.0.0.0",
             "port": 1028,
