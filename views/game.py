@@ -114,6 +114,7 @@ class Game(DesignerView):
         if self.game_manager.turn_count >= self.game_manager.tie_round and self.game_manager.check_tie():
             container.add_text(
                 "<:red_chip:1448166834137206925> <:yellow_chip:1448166817435746366> The grid is full! It is a tie!")
+            container.add_item(gallery)
         else:
             winner = self.game_manager.validate_connect(
             ) if self.game_manager.turn_count > 6 else None
